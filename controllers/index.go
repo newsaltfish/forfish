@@ -2,7 +2,7 @@ package controllers
 
 import "github.com/astaxie/beego"
 
-// IndexController 主页
+// IndexController 主页控制器
 type IndexController struct {
 	beego.Controller
 }

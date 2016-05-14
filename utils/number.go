@@ -1,6 +1,9 @@
 package utils
 
 // 数字相关操作
+import (
+	"strconv"
+)
 
 // ToFixed 保留指定位数
 // return
@@ -18,6 +21,9 @@ func ToFixed(number interface{}, n int) float64 {
 	}
 }
 func toFixed(number float64, n int) float64 {
-	// stronv
-	return 1.0
+	res, err := strconv.ParseFloat(strconv.FormatFloat(number, 'f', n, 64), 64)
+	if err != nil {
+		return 0.0
+	}
+	return res
 }
