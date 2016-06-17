@@ -23,6 +23,7 @@ func (c *MainController) Post() {
 	c.ServeJSON()
 }
 
+
 // LoginView 进入登录页面
 func (c *IndexController) LoginView() {
 	c.TplName = "index/index.html"
