@@ -1,13 +1,14 @@
 package controllers
 
-// // MainController 原生
-// type MainController struct {
-// 	beego.Controller
-// }
-//
-// // Get get请求
-// func (c *MainController) Get() {
-// 	c.Data["Website"] = "beego.me"
-// 	c.Data["Email"] = "astaxie@gmail.com"
-// 	c.TplName = "index.tpl"
-// }
+import "github.com/astaxie/beego"
+
+// TestController 测试
+type TestController struct {
+	beego.Controller
+}
+
+// Post 进入登录页面
+func (c *TestController) Post() {
+	c.Data["json"] = map[string]interface{}{"code": 1000, "msg": "嘿嘿嘿嘿", "请求参数": c.Ctx.Request.Form}
+	c.ServeJSON()
+}

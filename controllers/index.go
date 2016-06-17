@@ -17,13 +17,6 @@ func (c *MainController) Get() {
 	c.TplName = "index/index.html"
 }
 
-// Post 进入登录页面
-func (c *MainController) Post() {
-	c.Data["data"] = map[string]interface{}{"code": 1000, "msg": "嘿嘿嘿嘿", "请求参数": c.Ctx.Request.Form}
-	c.ServeJSON()
-}
-
-
 // LoginView 进入登录页面
 func (c *IndexController) LoginView() {
 	c.TplName = "index/index.html"
