@@ -1,8 +1,8 @@
 package main
 
 import (
+	_ "forfish/routers"
 	"github.com/astaxie/beego"
-	_ "hello/routers"
 )
 
 func main() {

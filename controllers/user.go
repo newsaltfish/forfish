@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"forfish/models"
+	"forfish/services"
 	"github.com/astaxie/beego"
-	"hello/models"
-	"hello/services"
 	"time"
 )
 

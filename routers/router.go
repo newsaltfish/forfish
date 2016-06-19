@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"hello/controllers"
+	"forfish/controllers"
 
 	"github.com/astaxie/beego"
 )

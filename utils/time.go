@@ -1,8 +1,9 @@
 package utils
 
-// var TimeLayout string
+var (
+	TimeLayout string //基础的时间格式
+)
 
-// TimeLayoutBase 基础的时间格式
-func TimeLayoutBase() string {
-	return "2006-01-02 15:04:05"
+func init() {
+	TimeLayout = "2006-01-02 15:04:05"
 }

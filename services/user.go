@@ -1,9 +1,9 @@
 package services
 
 import (
+	"forfish/models"
+	_ "forfish/utils"
 	"github.com/astaxie/beego/orm"
-	"hello/models"
-	_ "hello/utils"
 )
 
 var (
