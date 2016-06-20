@@ -5,33 +5,23 @@
     <title>你画我猜</title>
   </head>
   <body>
-<canvas id="canvas" width="300" height="300" style="back-ground=red"></canvas>
+  <!-- <canvas id="canvas" width="300" height="300" style="back-ground=red"></canvas> -->
+  <div class="namediv">
+    <input type="text" id="name" placeholder="输入名字">
+    <input type="button" id="nameBottun" value="确定">
+  </div>
 
-  </body>
-	<script type="text/javascript">
-		var sock = null;
-		var wsuri = "ws://127.0.0.1:1234/hello";
-		window.onload = function() {
-			console.log("onload");
-			sock = new WebSocket(wsuri);
-			sock.onopen = function() {
-				console.log("connected to " + wsuri);
-				sock.send("发送请求")
-			}
-			sock.onclose = function(e) {
-
-				console.log("connection closed (" + e.code + ")");
-			}
-			sock.onmessage = function(e) {
-				console.log("message received: " + e.data);
-			}
-		};
-
-		function send() {
-			// var msg = document.getElementById('message').value;
-			sock.send("msg");
-		};
-	</script>
-
-
+<div id="text" style="height=400px">
+  <div>
+    信息:
+  </div>
+</div>
+<div class="button">
+  <input type="text" id="msg" value="">
+  <input type="button" id="send" value="发送">
+</div>
+  <script type="text/javascript" src="/static/js/jquery-3.0.0.min.js"></script>
+  <script type="text/javascript" src="/static/js/websocket.js"></script>
+	<script type="text/javascript" src="/static/js/paint.js"></script>
+</body>
 </html>

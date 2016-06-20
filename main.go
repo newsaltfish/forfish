@@ -4,8 +4,6 @@ import (
 	"fmt"
 	_ "forfish/routers"
 	"forfish/utils"
-	"log"
-	"net/http"
 
 	"github.com/astaxie/beego"
 
@@ -13,13 +11,13 @@ import (
 )
 
 func main() {
-	http.Handle("/hello", websocket.Handler(utils.Echo))
-	beego.Handler("/", h, options)
+	//		http.Handle("/hello", websocket.Handler(utils.Echo))
+	beego.Handler("/hello", websocket.Handler(utils.Echo))
 
-	log.Fatal("starting")
-	if err := http.ListenAndServe(":1234", nil); err != nil {
-		log.Fatal("ListenAndServe:", err)
-	}
+	//	log.Fatal("starting")
+	//	if err := http.ListenAndServe(":1234", nil); err != nil {
+	//		log.Fatal("ListenAndServe:", err)
+	//	}
 	fmt.Println("结束")
 	beego.Run()
 }
