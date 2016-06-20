@@ -1,8 +1,6 @@
+// 聊天信息
 var sock = null;
 var wsuri = "ws://127.0.0.1:8080/hello";
-window.onload = function() {
-
-};
 $("#send").click(function () {
   var msg= $("#msg").val();
   sock.send(msg);
@@ -26,3 +24,20 @@ $("#nameBottun").click(function () {
     $("#text").append(html);
   }
 });
+// 图像信息
+var gamesock=new WebSocket("ws://127.0.0.1:8080/game")
+  gamesock.onopen = function() {
+  console.log("connected to ws://127.0.0.1:8080/game");
+  // gamesock.send($("#name").val());
+};
+
+  // console.log("dengl");
+  gamesock.onclose = function(e) {
+    console.log("connection closed (" + e.code + ")");
+  }
+  gamesock.onmessage = function(e) {
+    console.log(e.data);
+    // var loc = (e.data).split(",");
+    // context.lineTo(loc[0],loc[1]);
+    // context.stroke()
+  }
