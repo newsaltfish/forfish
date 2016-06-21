@@ -37,7 +37,7 @@ func Echo(ws *websocket.Conn) {
 
 // GameEcho 画图信息
 func GameEcho(ws *websocket.Conn) {
-	beego.Debug("new user", ws)
+	beego.Debug("new user", len(GameConns))
 	defer func() {
 		beego.Debug("leave")
 	}()
@@ -74,8 +74,12 @@ func MsgSend() {
 				websocket.Message.Send(v, ms)
 			}
 		case gms := <-GmsChannel:
-			for _, v := range GameConns {
-				websocket.Message.Send(v, gms)
+			for k, v := range GameConns {
+				if err := websocket.Message.Send(v, gms); err != nil {
+					locker.Lock()
+					GameConns = append(GameConns[:k], GameConns[k+1:]...)
+					locker.Unlock()
+				}
 			}
 		}
 	}

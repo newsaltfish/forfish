@@ -13,10 +13,10 @@ var context=  ($("#canvas")[0]).getContext("2d");
       context.moveTo(x,y)
       gamesock.send("move:"+x+","+y);
     });
-  $("#canvas").on("mouseup",function() {
+  $(document).on("mouseup",function() {
         mouserFlag=false;
-        console.log("leave");
-        context.closePath();
+        console.log("leaveuppp");
+        // context.closePath();
     });
   $("#canvas").on("mouseout",function() {
           mouserFlag=false;
