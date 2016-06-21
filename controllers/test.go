@@ -19,10 +19,10 @@ func (c *TestController) Post() {
 
 // Get 进入游戏页面
 func (c *TestController) Get() {
-	userName := c.GetSession("user")     //判断是否是已进入过游戏的用户
-	if _, ok := userName.(string); !ok { //已断开连接 需要重连
-
-	}
+	// userName := c.GetSession("user")     //判断是否是已进入过游戏的用户
+	// if _, ok := userName.(string); !ok { //已断开连接 需要重连
+	//
+	// }
 	// c.Data["user"] = utils.Game.Users
 	c.TplName = "guess/index.html"
 }
@@ -35,9 +35,12 @@ func (c *TestController) LoginView() {
 // Login 登录
 func (c *TestController) Login() {
 	uname := c.GetString("name")
+	// password := c.GetString("password")
 	defer func() {
 		c.ServeJSON()
 	}()
+	// server := services.DefaultServer
+	// server.Add(user)
 	if uname == "" {
 		c.Data["json"] = utils.ReturnFailure(1)
 		return

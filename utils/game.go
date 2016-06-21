@@ -56,7 +56,9 @@ var (
 	// Conns 连接
 	Conns = make(map[string]*websocket.Conn)
 	// GameConns 位置信息
-	GameConns = make(map[string]*websocket.Conn)
+	// GameConns = make(map[string]*websocket.Conn)
+	// GameConns 位置信息
+	GameConns []*websocket.Conn
 	// GmsChannel 游戏位置信息
 	GmsChannel = make(chan string, 10)
 	locker     sync.RWMutex //锁

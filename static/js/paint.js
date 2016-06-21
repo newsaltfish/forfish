@@ -3,12 +3,15 @@ var role="watcher";//角色
 var context=  ($("#canvas")[0]).getContext("2d");
   $("#canvas").on("mousedown",function(e) {
       console.log("heheh");
-      if role!="draw"{
-        return false;
+      if (role!="draw"){
+        // return false;
       }
       mouserFlag=true;
       context.beginPath();
-      context.moveTo(e.clientX,e.clientY)
+      var x=e.clientX;
+      var y=e.clientY;
+      context.moveTo(x,y)
+      gamesock.send("move:"+x+","+y);
     });
   $("#canvas").on("mouseup",function() {
         mouserFlag=false;
