@@ -1,7 +1,8 @@
 package utils
 
 var (
-	TimeLayout string //基础的时间格式
+	// TimeLayout 基础的时间格式
+	TimeLayout string
 )
 
 func init() {

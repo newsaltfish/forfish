@@ -2,7 +2,7 @@ package utils
 
 import (
 	"github.com/astaxie/beego/orm"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql" //导入驱动
 )
 
 func init() {

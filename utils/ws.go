@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"sync"
 
 	"github.com/astaxie/beego"
@@ -18,7 +17,7 @@ var (
 	// Conns 连接
 	Conns = make(map[string]*websocket.Conn)
 	// GameConns 位置信息
-	GameConns = make(map[*websocket.Conn]string)
+	GameConns = make(map[string]*websocket.Conn)
 	// GmsChannel 游戏位置信息
 	GmsChannel = make(chan string, 10)
 	locker     sync.RWMutex
@@ -28,7 +27,7 @@ var (
 func Echo(ws *websocket.Conn) {
 	user := ""
 	if err := websocket.Message.Receive(ws, &user); err != nil {
-		fmt.Println("连接错误" + err.Error())
+		beego.Debug("连接错误" + err.Error())
 	} else {
 		locker.Lock()
 		Conns[user] = ws
@@ -43,14 +42,10 @@ func Echo(ws *websocket.Conn) {
 	for {
 		reply := ""
 		if err := websocket.Message.Receive(ws, &reply); err != nil {
-			fmt.Println("连接错误" + err.Error())
+			beego.Debug("连接错误" + err.Error())
 			break
 		}
-		fmt.Println("客户端发送:" + reply)
 		MsgChannel <- user + ":" + reply
-		// if err := websocket.Message.Send(ws, "服务器发送的字段:嘿嘿嘿"); err != nil {
-		// 	break
-		// }
 	}
 }
 
@@ -64,23 +59,19 @@ func GameEcho(ws *websocket.Conn) {
 	if err := websocket.Message.Receive(ws, &player); err != nil {
 		beego.Debug("连接错误" + err.Error())
 	}
-	if player != "" {
-		GameConns[ws] = "player"
-	} else {
-		GameConns[ws] = "guess"
-	}
+	locker.Lock()
+	GameConns[player] = ws
+	locker.Unlock()
 	for {
 		reply := ""
 		if err := websocket.Message.Receive(ws, &reply); err != nil {
 			beego.Debug("连接错误" + err.Error())
+			locker.Lock()
+			delete(GameConns, player)
+			locker.Unlock()
 			break
 		}
-
-		// fmt.Println("位置信息:" + reply)
 		GmsChannel <- reply
-		// if err := websocket.Message.Send(ws, "服务器发送的字段:嘿嘿嘿"); err != nil {
-		// 	break
-		// }
 	}
 }
 
@@ -93,9 +84,8 @@ func MsgSend() {
 				websocket.Message.Send(v, ms)
 			}
 		case gms := <-GmsChannel:
-			for k, _ := range GameConns {
-
-				beego.Debug(websocket.Message.Send(k, gms))
+			for _, v := range GameConns {
+				websocket.Message.Send(v, gms)
 			}
 		}
 	}

@@ -6,18 +6,14 @@ var context=  ($("#canvas")[0]).getContext("2d");
   $("#canvas").on("mousedown",function(e) {
       console.log("heheh");
       mouserFlag=true;
+      context.beginPath();
       context.moveTo(e.clientX,e.clientY)
       // context.moveTo(10,20)
     });
   $("#canvas").on("mouseup",function() {
         mouserFlag=false;
-        // context.lineTo(10,30);
-        // context.lineTo(10,40);
-        // context.lineTo(10,50);
-
         console.log("leave");
-
-        // context.closePath();
+        context.closePath();
     });
   $("#canvas").on("mousemove",function(e) {
     if (!mouserFlag) {
