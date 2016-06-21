@@ -14,4 +14,5 @@ func init() {
 	//用户信息相关
 	beego.Router("/user/register", &controllers.UserController{})
 	beego.Router("/test", &controllers.TestController{})
+	beego.Router("/game/login", &controllers.TestController{}, "get:LoginView;post:Login")
 }
