@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"forfish/services"
 	"forfish/utils"
 
 	"github.com/astaxie/beego"
@@ -34,17 +35,16 @@ func (c *TestController) LoginView() {
 
 // Login 登录
 func (c *TestController) Login() {
-	uname := c.GetString("name")
-	// password := c.GetString("password")
+	account := c.GetString("name")
+	password := c.GetString("password")
 	defer func() {
 		c.ServeJSON()
 	}()
-	// server := services.DefaultServer
-	// server.Add(user)
-	if uname == "" {
+	server := new(services.UserService)
+	if !server.Login(account, password) {
 		c.Data["json"] = utils.ReturnFailure(1)
 		return
 	}
-	c.SetSession("user", uname)
+	c.SetSession("account", account)
 	c.Data["json"] = utils.ReturnSuccess(nil)
 }
