@@ -4,6 +4,7 @@ var wsuri = "ws://127.0.0.1:8081/hello";
 $("#send").click(function () {
   var msg= $("#msg").val();
   sock.send(msg);
+      $("#text")[0].scrollTop =  $("#text")[0].scrollHeight;
 });
 $(".button").hide();
 $("#nameBottun").click(function () {
@@ -22,6 +23,8 @@ $("#nameBottun").click(function () {
     console.log("message received: " + e.data);
     var html='<p></p>'+e.data+'<br>'
     $("#text").append(html);
+    $("#text")[0].scrollTop =  $("#text")[0].scrollHeight;
+
   }
 });
 // 图像信息
